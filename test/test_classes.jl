@@ -167,3 +167,22 @@ obj = AbstractLog{Float64}([1. 2.; 3. 4.])
 #     #= /Users/rjp/.julia/packages/MacroTools/4AjBS/src/utils.jl:302 =#
 #     new{T3, T4}(one, two, x, y)
 # end
+
+
+
+
+# super constructor inheritence
+@class Animal begin
+    x
+    Animal(x, y) = new(x)
+end
+
+function Animal(x, y, z)
+    return Animal(x+y+z)
+end
+
+@class Dog <: Animal begin
+end
+
+@test Dog(1,2).x == 1
+@test Dog(1,2,3).x == 6
